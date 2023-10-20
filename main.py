@@ -1,3 +1,4 @@
+# modified by XuEddie
 import cv2 as cv
 import torch
 
@@ -5,6 +6,7 @@ import threading
 
 from UI_Part.Ui import UI
 from UI_Part.UI_Widgets import MyApp
+
 
 # rewrite by yuanshen
 def function1():
@@ -30,7 +32,7 @@ def function2():
 
 def function3():
     # UI界面
-    widgets = MyApp(400,300)
+    widgets = MyApp(400, 300)
     widgets.run()
 
 
