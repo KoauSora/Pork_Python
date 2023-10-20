@@ -6,7 +6,7 @@ import threading
 from UI_Part.Ui import UI
 from UI_Part.UI_Widgets import MyApp
 
-
+# rewrite by yuanshen
 def function1():
     # 这里用来处理图像并且输出处理的结果,以下是测试程序
     UI_object1 = UI()
