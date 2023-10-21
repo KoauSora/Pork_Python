@@ -22,11 +22,9 @@ Run_or_Not = False
 
 def function1():
     # 这里用来处理图像并且输出处理的结果,以下是测试程序
-<<<<<<< Updated upstream
+
     event3.wait()
-=======
     time.sleep(10)
->>>>>>> Stashed changes
     print("开始执行线程1！")
 
     # 这里是添加分析函数的地方my_task中执行需要分析的函数，提供了image的接口，这将返回一张图片，请使用此变量进行操作
@@ -73,14 +71,16 @@ def function3():
     Run_or_Not = False
 
 
-thread1 = threading.Thread(target=function1)
-thread2 = threading.Thread(target=function2)
-thread3 = threading.Thread(target=function3)
+def main():
+    thread1 = threading.Thread(target=function1)
+    thread2 = threading.Thread(target=function2)
+    thread3 = threading.Thread(target=function3)
 
-thread3.start()
-thread1.start()
-thread2.start()
+    thread3.start()
+    thread1.start()
+    thread2.start()
 
-thread1.join()
-thread2.join()
-thread3.join()
+    thread1.join()
+    thread2.join()
+    thread3.join()
+

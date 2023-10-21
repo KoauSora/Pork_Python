@@ -10,8 +10,6 @@ class MyApp(MyApp_Base):
     UI_object = UI()
 
     def __init__(self, Length_in, Height_in):
-        super().__init__(Length_in, Height_in)
-
         self.interval = 2
 
         self.Run_or_not = False
@@ -70,4 +68,3 @@ class MyApp(MyApp_Base):
         self.Run_or_not = True
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.root.mainloop()
-
