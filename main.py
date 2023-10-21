@@ -25,9 +25,7 @@ Run_or_Not = False
 
 def function1():
     # 这里用来处理图像并且输出处理的结果,以下是测试程序
-
     event3.wait()
-    time.sleep(10)
     print("开始执行线程1！")
 
 # 这里是添加分析函数的地方my_task中执行需要分析的函数，提供了image的接口，这将返回一张图片，请使用此变量进行操作
@@ -63,12 +61,10 @@ def function2():
 def function3():
     # UI界面
     widgets = MyApp(400, 300)
-
     global Run_or_Not
     Run_or_Not = True
     print("开始执行")
     event3.set()
-
     widgets.run()
     Run_or_Not = False
 
