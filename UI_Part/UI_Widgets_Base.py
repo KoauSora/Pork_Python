@@ -22,7 +22,6 @@ class MyApp_Base:
         print("这是运行函数")
         pass
 
-
     def run(self):
         print("Please rewrite this function(UI_Widgets_Base.run())!!!")
         print("这是主事件函数")

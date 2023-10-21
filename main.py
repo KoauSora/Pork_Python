@@ -1,6 +1,4 @@
-
 import time
-
 
 # modified by XuEddie
 
@@ -13,7 +11,6 @@ import concurrent.futures
 from UI_Part.Ui import UI
 from UI_Part.UI_Widgets import MyApp
 
-
 # rewrite by yuanshen
 
 
@@ -25,12 +22,10 @@ Run_or_Not = False
 
 def function1():
     # 这里用来处理图像并且输出处理的结果,以下是测试程序
-
     event3.wait()
-    time.sleep(10)
     print("开始执行线程1！")
 
-# 这里是添加分析函数的地方my_task中执行需要分析的函数，提供了image的接口，这将返回一张图片，请使用此变量进行操作
+    # 这里是添加分析函数的地方my_task中执行需要分析的函数，提供了image的接口，这将返回一张图片，请使用此变量进行操作
     def my_task(image):
         if image is None:
             pass
@@ -47,7 +42,8 @@ def function1():
             if UI_object1.need_more_thread():
                 with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
                     print("这是多线程的结果")
-                    futures = [executor.submit(my_task, UI_object1.get_mat()) for i in range(UI_object1.need_more_thread())]
+                    futures = [executor.submit(my_task, UI_object1.get_mat()) for i in
+                               range(UI_object1.need_more_thread())]
             else:
                 my_task(UI_object1.get_mat())
     print("执行完成")
