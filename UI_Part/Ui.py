@@ -6,6 +6,7 @@ from UI_Part.UI_Base import UI_Base
 
 
 class UI(UI_Base):
+    Ready = False
 
     def __init__(self):
         super().__init__()
@@ -34,5 +35,15 @@ class UI(UI_Base):
                     UI_Base.screenshot_image_list.pop(0)
                     return temp
 
+    def need_more_thread(self):
+        with UI_Base.Lock_Image:
+            if len(UI_Base.screenshot_image_list) != 0:
+                return len(UI_Base.screenshot_image_list)
+            else:
+                return False
+
     def get_ready(self):
-        super().get_ready()
+        UI.Ready = True
+
+    def not_ready(self):
+        UI.Ready = False
