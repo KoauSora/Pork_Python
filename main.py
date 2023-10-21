@@ -1,4 +1,8 @@
+
 import time
+
+
+# modified by XuEddie
 
 import cv2 as cv
 import torch
@@ -8,6 +12,7 @@ import concurrent.futures
 
 from UI_Part.Ui import UI
 from UI_Part.UI_Widgets import MyApp
+
 
 # rewrite by yuanshen
 
@@ -58,10 +63,12 @@ def function2():
 def function3():
     # UI界面
     widgets = MyApp(400, 300)
+
     global Run_or_Not
     Run_or_Not = True
     print("开始执行")
     event3.set()
+
     widgets.run()
     Run_or_Not = False
 
