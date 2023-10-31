@@ -1,4 +1,10 @@
-from typing import overload
+import sys
+from recognize import *
+
+game_areas = {'self_player': (0, 1 / 2, 1, 1),
+              'next_player': (1 / 2, 1 / 6, 1, 1 / 2),
+              'last_player': (0, 1 / 6, 1 / 2, 1 / 2),
+              'public_area': (0, 0, 1, 1 / 6)}
 
 
 class Deck:
@@ -44,21 +50,6 @@ class Player:
         self.character = None
         self.status = None
 
-    def update(self, character: int):
-        self.character = character
-        if character == 0:
-            self.status = 0
-        elif character == 1:
-            self.status = 1
-
-
-class GameInterface:
-    def __init__(self):
-        pass
-
-    def initialize(self):
-        pass
-
 
 class Game:
     """
@@ -66,9 +57,8 @@ class Game:
     status: 0:pre stage, 1:stage, None:game not started or game ended
     players: list of Player objects, the index indicates the position of the player(0:self, 1:next, 2:last)
     """
-
-    def __init__(self):
-        self.gi: GameInterface = GameInterface()
-        self.globalDeck = Deck(is_global=True)
-        self.status = None
-        self.players: list[Player] = [Player() for _ in range(3)]
+    globalDeck = Deck(is_global=True)
+    status = None
+    players: list[Player] = [Player() for _ in range(3)]
+    screen = None
+    lord_position = None
