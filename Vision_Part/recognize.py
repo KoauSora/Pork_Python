@@ -20,13 +20,13 @@ def getPlayerCharacter(image, area, threshold=0.7, zoom=1):
 
     image = image[y1:y2, x1:x2]
 
-    cv.imshow('image', image)
-    cv.waitKey(0)
-    cv.destroyAllWindows()
+    # cv.imshow('image', image)
+    # cv.waitKey(0)
+    # cv.destroyAllWindows()
 
     gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 
-    template = cv.imread('templates/lord.jpg', cv.IMREAD_GRAYSCALE)
+    template = cv.imread('C:\\Users\\21525\\Desktop\\Pork\\Pork_Python\\Vision_Part\\templates\\lord.jpg', cv.IMREAD_GRAYSCALE)
 
     result = cv.matchTemplate(gray, template, cv.TM_CCOEFF_NORMED)
     locations = np.where(result >= threshold)

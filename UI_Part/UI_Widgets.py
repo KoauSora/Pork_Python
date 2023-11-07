@@ -13,6 +13,7 @@ class MyApp(MyApp_Base):
         self.interval = 2
 
         self.Run_or_not = False
+        self.Run_program_start = False
 
         self.root = tkinter.Tk()
         self.root.title("Pork_AI")
@@ -52,6 +53,7 @@ class MyApp(MyApp_Base):
         MyApp.UI_object.not_ready()
 
     def run_program(self):
+        self.Run_program_start = True
         while MyApp.UI_object.Ready and self.Run_or_not:
             MyApp.UI_object.screen_shot()
             print("This is screenshot function!")
@@ -60,7 +62,8 @@ class MyApp(MyApp_Base):
     def on_closing(self):
         self.stop_button_clicked()
         self.Run_or_not = False
-        self.program_thread.join()
+        if self.Run_program_start is True:
+            self.program_thread.join()
         self.root.destroy()
 
     def run(self):

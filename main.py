@@ -5,8 +5,8 @@ import threading
 import concurrent.futures
 from UI_Part.Ui import UI
 from UI_Part.UI_Widgets import MyApp
+from Vision_Part.recognize import *
 
-complet_result = []
 event3 = threading.Event()
 Run_or_Not = False
 
@@ -20,10 +20,9 @@ def function1():
     def my_task(image):
         if image is None:
             pass
-            # print("image is None!")
         else:
-            print("mytask")
-            complet_result.append("123456")
+            image_need_to_make = image
+            print(getPlayerCharacter(image_need_to_make, [0, 0, 1, 1]))
 
     UI_object1 = UI()
     print(Run_or_Not)
