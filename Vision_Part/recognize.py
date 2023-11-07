@@ -135,7 +135,7 @@ def getButtonPosition(image, button, threshold=0.8, zoom=0.5):
     """
     template = cv.imread('templates/' + button + '.jpg')
     template = cv.resize(template, (int(template.shape[1] * zoom), int(template.shape[0] * zoom)))
-    cv.imshow('t',template)
+    # cv.imshow('t',template)
 
 
     x1 = int(image.shape[1] * 0)
