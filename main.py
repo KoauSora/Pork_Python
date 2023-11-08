@@ -6,6 +6,7 @@ import concurrent.futures
 from UI_Part.Ui import UI
 from UI_Part.UI_Widgets import MyApp
 from Vision_Part.process import *
+from AI_Part.AI_Base import *
 
 #这个是线程的阻塞机制，用来调整线程的先后关系
 event3 = threading.Event()
@@ -43,6 +44,10 @@ def function1():
 
 
 def function2():
+
+
+
+
     # 这里用来并行的AI算法操作，以实现分析出牌，以下是测试程序
     print("开始执行线程2")
     output = torch.rand(3, 2)
