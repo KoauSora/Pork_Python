@@ -1,5 +1,5 @@
 import sys
-from recognize import *
+from Vision_Part.recognize import *
 
 game_areas = {'self_player': (0, 1 / 2, 1, 1),
               'next_player': (1 / 2, 1 / 6, 1, 1 / 2),
@@ -46,7 +46,7 @@ class Player:
     """
 
     def __init__(self):
-        self.deck = None
+        self.deck = Deck()
         self.character = None
         self.status = None
 

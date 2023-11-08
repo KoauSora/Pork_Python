@@ -5,7 +5,7 @@ import threading
 import concurrent.futures
 from UI_Part.Ui import UI
 from UI_Part.UI_Widgets import MyApp
-from Vision_Part.recognize import *
+from Vision_Part.process import *
 
 #这个是线程的阻塞机制，用来调整线程的先后关系
 event3 = threading.Event()
@@ -24,7 +24,9 @@ def function1():
             pass
         else:
             image_need_to_make = image
-            print(getPlayerCharacter(image_need_to_make, [0, 0, 1, 1]))
+            Game.screen = image
+            initPlayers()
+            print("身份是",Game.players[0].character,Game.players[1].character,Game.players[2].character,sep=" ")
 
     UI_object1 = UI()
     while Run_or_Not:

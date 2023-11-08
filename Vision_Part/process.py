@@ -1,5 +1,5 @@
-from model import *
-from recognize import *
+from Vision_Part.model import *
+from Vision_Part.recognize import *
 
 
 def updateScreen():

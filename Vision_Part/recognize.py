@@ -26,7 +26,7 @@ def getPlayerCharacter(image, area, threshold=0.7, zoom=1):
 
     gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 
-    template = cv.imread('C:\\Users\\21525\\Desktop\\Pork\\Pork_Python\\Vision_Part\\templates\\lord.jpg', cv.IMREAD_GRAYSCALE)
+    template = cv.imread('Vision_Part/templates/lord.jpg', cv.IMREAD_GRAYSCALE)
 
     result = cv.matchTemplate(gray, template, cv.TM_CCOEFF_NORMED)
     locations = np.where(result >= threshold)
@@ -66,7 +66,7 @@ def getCardsInArea(image, area, ratio=1, threshold=0.95, zoom=0.5):
 
     # cards are in the order of 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2, black joker, red joker
     for i in range(15):
-        template = cv.imread('templates/' + str(i) + '.jpg')
+        template = cv.imread('Vision_Part/templates/' + str(i) + '.jpg')
         template = cv.resize(template, (int(template.shape[1] * ratio), int(template.shape[0] * ratio)))
         if i >= 13:
             # here we use the colored image to match the jokers
@@ -97,7 +97,7 @@ def getCardPosition(image, rank, threshold=0.95, zoom=0.5):
     :param zoom:
     :return:
     """
-    template = cv.imread('templates/' + str(rank) + '.jpg')
+    template = cv.imread('Vision_Part/templates/' + str(rank) + '.jpg')
     template = cv.resize(template, (int(template.shape[1] * zoom), int(template.shape[0] * zoom)))
 
     x1 = int(image.shape[1] * 0)
@@ -133,7 +133,7 @@ def getButtonPosition(image, button, threshold=0.8, zoom=0.5):
     :param zoom:
     :return:
     """
-    template = cv.imread('templates/' + button + '.jpg')
+    template = cv.imread('Vision_Part/templates/' + button + '.jpg')
     template = cv.resize(template, (int(template.shape[1] * zoom), int(template.shape[0] * zoom)))
     # cv.imshow('t',template)
 
