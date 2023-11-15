@@ -34,6 +34,9 @@ class MyApp(MyApp_Base):
         # 这是一个线程
         self.program_thread = None
 
+    def show_result(self, text_in):
+        self.result_label = tkinter.Label(self.root, text=text_in)
+
     def change_interval(self, interval_in):
         self.interval = interval_in
 
