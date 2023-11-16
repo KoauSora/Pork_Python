@@ -10,8 +10,15 @@ from AI_Part.AI_part import *
 
 # 这个是线程的阻塞机制，用来调整线程的先后关系
 event3 = threading.Event()
+event2 = threading.Event()
 # 此变量表示是否有必要继续存在function1，来处理图片，当窗口关闭的时候变为false
 Run_or_Not = False
+
+
+def change_result(text_in=""):
+    with MyApp.Lock_text:
+        MyApp.text_text = text_in
+        print(MyApp.text_text)
 
 
 def function1():
@@ -49,7 +56,6 @@ def function1():
                 pass
 
     event_need = event_postion()
-    event_need.__init__()
 
     # 这里是添加分析函数的地方my_task中执行需要分析的函数，提供了image的接口，这将返回一张图片，请使用此变量进行操作
     def my_task(image):
@@ -75,8 +81,16 @@ def function1():
 
 
 def function2():
+    event2.wait()
+    my_ai = AI_part()
     print("开始执行线程2")
-    output = torch.rand(3, 2)
+    for i in range(10):
+        time.sleep(2)
+        output = torch.rand(3, 2)
+        list_data = output.tolist()
+        # 将列表转换为字符串
+        str_data = str(list_data)
+        change_result(str_data)
 
     # 在锁的保护下更新UI
 
@@ -89,12 +103,13 @@ def function3():
     global Run_or_Not
     Run_or_Not = True
     event3.set()
+    event2.set()
     widgets.run()
     Run_or_Not = False
     print("线程3执行完成")
 
 
-def main():
+if __name__ == '__main__':
     thread1 = threading.Thread(target=function1)
     thread2 = threading.Thread(target=function2)
     thread3 = threading.Thread(target=function3)
@@ -106,6 +121,3 @@ def main():
     thread1.join()
     thread2.join()
     thread3.join()
-
-
-main()

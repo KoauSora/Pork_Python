@@ -58,3 +58,24 @@ class VisionVirtualBase(ABC):
         :return:
         """
         pass
+
+    @abstractmethod
+    def get_three_landlord_cards_real(self):
+        """
+
+        :return: 三张底牌 这种样子[123]
+        """
+
+    @abstractmethod
+    def get_self_turn(self):
+        """
+
+        :return: 返回是否是我的回合，意思是如果要我出牌了就返回true，否则返回false
+        """
+
+    @abstractmethod
+    def get_self_turn_over(self):
+        """
+
+        :return: 返回我的回合是否结束， 就是我出牌是否完成
+        """

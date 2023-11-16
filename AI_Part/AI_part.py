@@ -122,7 +122,7 @@ class AI_part:
                 self.win_rate = action_message["win_rate"]
 
                 self.order += 1
-                self.ready.set()  # 要改
+                # self.ready.set()  # 要改
             elif self.order != 0:
 
                 self.other_played_cards_real = down_in
@@ -139,7 +139,7 @@ class AI_part:
                 self.win_rate = action_message["win_rate"]
 
                 self.order += 1
-                self.ready.set()
+                # self.ready.set()
         elif self.play_order == 1:
 
             self.other_played_cards_real = down_in
@@ -155,7 +155,7 @@ class AI_part:
             self.win_rate = action_message["win_rate"]
 
             self.order += 1
-            self.ready.set()
+            # self.ready.set()
         elif self.play_order == 2:
             if self.order != 0:
 
@@ -167,7 +167,7 @@ class AI_part:
                 self.cards_out = action_message["action"] if action_message["action"] else "不出"
                 self.win_rate = action_message["win_rate"]
 
-                self.ready.set()
+                # self.ready.set()
                 self.order += 1
             elif self.order != 0:
 
@@ -183,7 +183,7 @@ class AI_part:
                 self.cards_out = action_message["action"] if action_message["action"] else "不出"
                 self.win_rate = action_message["win_rate"]
 
-                self.ready.set()
+                # self.ready.set()
                 self.order += 1
 
     def get_cards_out(self):

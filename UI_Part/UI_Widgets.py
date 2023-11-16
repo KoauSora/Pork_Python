@@ -8,6 +8,8 @@ from UI_Part.UI_Widgets_Base import MyApp_Base
 
 class MyApp(MyApp_Base):
     UI_object = UI()
+    text_text = "..."
+    Lock_text = threading.Lock()
 
     def __init__(self, Length_in, Height_in):
         self.interval = 2
@@ -31,14 +33,22 @@ class MyApp(MyApp_Base):
         self.result_label = tkinter.Label(self.root, text="")
         self.result_label.pack()
 
+        # 创建一个标签用来显示出牌和胜率
+        self.cards_result = tkinter.Label(self.root, text=MyApp.text_text)
+        self.cards_result.pack()
+
         # 这是一个线程
         self.program_thread = None
 
-    def show_result(self, text_in):
-        self.result_label = tkinter.Label(self.root, text=text_in)
-
     def change_interval(self, interval_in):
         self.interval = interval_in
+
+    def update_label(self):
+        with MyApp.Lock_text:
+            self.cards_result.config(text=MyApp.text_text)
+            # print("update:")
+            # print(MyApp.text_text)
+        self.root.after(500, self.update_label)
 
     def start_button_clicked(self):
         # 在这里执行您希望在点击按钮后执行的操作
@@ -72,5 +82,6 @@ class MyApp(MyApp_Base):
     def run(self):
         # 开始主事件循环
         self.Run_or_not = True
+        self.update_label()
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.root.mainloop()
