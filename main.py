@@ -42,7 +42,6 @@ class event_postion:
     def UI_start(self):
         event_postion.UI_object1 = UI()
 
-
     def __init__(self):
         # self.pos_func = [initPlayers(), playCards(), getLastPlayedCards, getSelfCardPosition, getHoleCards,
         #                  getRestCards, getSelfButtonPosition]
@@ -95,6 +94,7 @@ def function1():
             # updateScreen(image)
             # initPlayers()
             # print("身份是", Game.players[0].character, Game.players[1].character, Game.players[2].character, sep=" ")
+
     print("function1:")
     print(event_postion.Run_or_Not)
 
@@ -123,7 +123,13 @@ def function2():
     while event_postion.Run_or_Not:
         while event_postion.UI_object1.Ready:
             if event_postion.pos == 0:
-
+                my_ai.init_cards("D22AKKKQJT9877655443", "landlord", "2T7")
+                my_ai.init_players()
+                my_ai.init_Env()
+                my_ai.play_order = 0
+                my_ai.start_predict("", "")
+                print(my_ai.win_rate)
+                print(my_ai.cards_out)
                 pass
             elif event_postion.pos == 1:
                 pass

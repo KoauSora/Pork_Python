@@ -1,5 +1,5 @@
-from AI_Part.DouZero.douzero.env.game import GameEnv, RealCard2EnvCard
-from AI_Part.DouZero.douzero.evaluation.deep_agent import DeepAgent
+from AI_Part.douzero.env.game import GameEnv, RealCard2EnvCard
+from AI_Part.douzero.evaluation.deep_agent import DeepAgent
 import threading
 
 AllEnvCard = [3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7,
@@ -47,9 +47,9 @@ class AI_part:
 
         # 模型路径
         self.model_path = {
-            'landlord': "baselines/landlord.ckpt",
-            'landlord_up': "baselines/landlord_up.ckpt",
-            'landlord_down': "baselines/landlord_down.ckpt"
+            'landlord': "C:\\Users\\lenovo\\Desktop\\Pork_Python\\AI_Part\\douzero\\baselines\\landlord.ckpt",
+            'landlord_up': "C:\\Users\\lenovo\\Desktop\\Pork_Python\\AI_Part\\douzero\\baselines\\landlord_up.ckpt",
+            'landlord_down': "C:\\Users\\lenovo\\Desktop\\Pork_Python\\AI_Part\\douzero\\baselines\\landlord_down.ckpt"
         }
 
     def init_cards(self, user_hand_card_in, user_position_in, three_landlord_cards_real):
@@ -72,7 +72,13 @@ class AI_part:
         self.three_landlord_cards_env = [RealCard2EnvCard[c] for c in list(self.three_landlord_cards_real)]
         # 玩家角色代码：0-地主上家, 1-地主, 2-地主下家
         self.user_position = user_position_in
-        self.user_position_code = [0, 1, 2][self.user_position]
+        if self.user_position == "landlord":
+            self.user_position_code = 1
+        elif self.user_position == "landlord_up":
+            self.user_position_code = 0
+        elif self.user_position == "landlord_down":
+            self.user_position_code = 2
+        # self.user_position_code = [0, 1, 2][self.user_position]
         # 开局时三个玩家的手牌
         self.card_play_data_list = {}
         # 出牌顺序：0-玩家出牌, 1-玩家下家出牌, 2-玩家上家出牌
