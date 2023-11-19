@@ -1,12 +1,10 @@
 import time
-import cv2 as cv
-import torch
 import threading
 import concurrent.futures
 from UI_Part.Ui import UI
 from UI_Part.UI_Widgets import MyApp
-from Vision_Part.process import *
 from AI_Part.AI_part import *
+from Vision_Part.Vision import Vision
 
 # 这个是线程的阻塞机制，用来调整线程的先后关系
 event3 = threading.Event()
@@ -61,11 +59,7 @@ class event_postion:
             return
         self.image = image_in
         if self.pos == 0:
-            updateScreen(self.image)
-            initPlayers()
-            print("身份是", Game.players[0].character, Game.players[1].character, Game.players[2].character, sep=" ")
-
-            # self.pos_func[self.pos]()
+            pass
         elif self.pos == 1:
             pass
         elif self.pos == 2:
@@ -74,7 +68,7 @@ class event_postion:
     def change_result(self, text_in=""):
         with MyApp.Lock_text:
             MyApp.text_text = text_in
-            print(MyApp.text_text)
+            # print(MyApp.text_text)
 
 
 def function1():
@@ -121,24 +115,48 @@ def function2():
 
     while event_postion.Run_or_Not:
         while event_postion.UI_object1.Ready:
-            if event_postion.pos == 0:
-                my_ai.init_cards("D22AKKKQJT9877655443", "landlord", "2T7")
-                my_ai.init_players()
-                my_ai.init_Env()
-                my_ai.play_order = 0
-                my_ai.start_predict("", "")
-                print(my_ai.win_rate)
-                print(my_ai.cards_out)
-                pass
-            elif event_postion.pos == 1:
-                pass
+            pass
+            # if event_postion.pos == 0:
+            #     my_ai.init_cards("D22AKKKQJT9877655443", "landlord", "2T7")
+            #     my_ai.init_players()
+            #     my_ai.init_Env()
+            #     my_ai.play_order = 0
+            #     my_ai.start_predict("", "")
+            #     event_need.change_result(my_ai.win_rate + ": " + my_ai.cards_out)
+            #     event_postion.pos = 1
+            # elif event_postion.pos == 1:
+            #     my_ai.start_predict("T","")
+            #     event_need.change_result(my_ai.win_rate + ": " + my_ai.cards_out)
+            #     event_postion.pos = 2
+            # elif event_postion.pos == 2:
+            #     my_ai.start_predict("", "2")
+            #     event_need.change_result(my_ai.win_rate + ": " + my_ai.cards_out)
+            #     event_postion.pos = 3
+            # elif event_postion.pos == 3:
+            #     my_ai.start_predict("", "33")
+            #     event_need.change_result(my_ai.win_rate + ": " + my_ai.cards_out)
+            #     event_postion.pos = 4
+            # elif event_postion.pos == 4:
+            #     my_ai.start_predict("88", "99")
+            #     event_need.change_result(my_ai.win_rate + ": " + my_ai.cards_out)
+            #     event_postion.pos = 5
+            # elif event_postion.pos == 5:
+            #     my_ai.start_predict("", "")
+            #     event_need.change_result(my_ai.win_rate + ": " + my_ai.cards_out)
+            #     event_postion.pos = 6
+            # elif event_postion.pos == 6:
+            #     my_ai.start_predict("", "")
+            #     event_need.change_result(my_ai.win_rate + ": " + my_ai.cards_out)
+            #     event_postion.pos = 7
+            # elif event_postion.pos == 7:
+            #     my_ai.start_predict("7", "2")
+            #     event_need.change_result(my_ai.win_rate + ": " + my_ai.cards_out)
+            #     event_postion.pos = 8
+            # elif event_postion.pos == 8:
+            #     my_ai.start_predict("", "")
+            #     event_need.change_result(my_ai.win_rate + ": " + my_ai.cards_out)
+            #     event_postion.pos = 9
             time.sleep(2)
-            output = torch.rand(3, 2)
-            list_data = output.tolist()
-            # 将列表转换为字符串
-            str_data = str(list_data)
-            event_need.change_result(str_data)
-
     # 在锁的保护下更新UI
 
     print("线程2执行完成")
