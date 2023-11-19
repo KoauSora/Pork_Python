@@ -1,4 +1,4 @@
-from AI_Part.douzero.env.game import GameEnv
+from AI_Part.DouZero.env.game import GameEnv
 from .deep_agent import DeepAgent
 
 EnvCard2RealCard = {3: '3', 4: '4', 5: '5', 6: '6', 7: '7',

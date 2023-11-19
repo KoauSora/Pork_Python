@@ -82,7 +82,6 @@ def function1():
     event3.wait()
     print("开始执行线程1！")
     event_need = event_postion()
-    event_need.UI_start()
 
     # 这里是添加分析函数的地方my_task中执行需要分析的函数，提供了image的接口，这将返回一张图片，请使用此变量进行操作
     def my_task(image):
@@ -148,8 +147,9 @@ def function2():
 def function3():
     widgets = MyApp(400, 300)
     print("开始执行线程3")
-
+    event_my = event_postion()
     event_postion.Run_or_Not = True
+    event_my.UI_start()
     event3.set()
     event2.set()
     widgets.run()

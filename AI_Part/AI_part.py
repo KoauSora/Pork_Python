@@ -1,5 +1,5 @@
-from AI_Part.douzero.env.game import GameEnv, RealCard2EnvCard
-from AI_Part.douzero.evaluation.deep_agent import DeepAgent
+from AI_Part.DouZero.env.game import GameEnv, RealCard2EnvCard
+from AI_Part.DouZero.evaluation.deep_agent import DeepAgent
 import threading
 
 AllEnvCard = [3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7,
@@ -47,9 +47,9 @@ class AI_part:
 
         # 模型路径
         self.model_path = {
-            'landlord': "C:\\Users\\lenovo\\Desktop\\Pork_Python\\AI_Part\\douzero\\baselines\\landlord.ckpt",
-            'landlord_up': "C:\\Users\\lenovo\\Desktop\\Pork_Python\\AI_Part\\douzero\\baselines\\landlord_up.ckpt",
-            'landlord_down': "C:\\Users\\lenovo\\Desktop\\Pork_Python\\AI_Part\\douzero\\baselines\\landlord_down.ckpt"
+            'landlord': "AI_Part/DouZero/baselines/landlord.ckpt",
+            'landlord_up': "AI_Part/DouZero/baselines/landlord_up.ckpt",
+            'landlord_down': "AI_Part/DouZero/baselines/landlord_down.ckpt"
         }
 
     def init_cards(self, user_hand_card_in, user_position_in, three_landlord_cards_real):

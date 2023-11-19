@@ -1,10 +1,10 @@
 import torch
 import numpy as np
 
-from AI_Part.douzero.env.env import get_obs
+from AI_Part.DouZero.env.env import get_obs
 
 def _load_model(position, model_path):
-    from AI_Part.douzero.dmc.models import model_dict
+    from AI_Part.DouZero.dmc.models import model_dict
     model = model_dict[position]()
     model_state_dict = model.state_dict()
     if torch.cuda.is_available():

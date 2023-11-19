@@ -1,4 +1,4 @@
-from AI_Part.douzero.env.utils import *
+from AI_Part.DouZero.env.utils import *
 import collections
 
 # check if move is a continuous sequence
