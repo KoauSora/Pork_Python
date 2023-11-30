@@ -17,7 +17,7 @@ event2 = threading.Event()
 class event_postion:
     """
     :Run_or_Not  表示当前UI部分是否开始运行
-    :pos 表示当前的执行函数 wait for writing
+    :pos 表示当前的执行函数 pos = 0 代表 识别三张底牌，地主位置，玩家初始手牌，
     :user_position_in: 'landlord_up', 'landlord', 'landlord_down'
     :three_landlord_cards_real: 同下
     :user_hand_card_in: example :假设有 2 个 2 ，两个A ，三个 3 ，则输入'22AA333'
@@ -25,8 +25,10 @@ class event_postion:
     :down_in: 玩家下家的牌，如三个A 则输入“AAA”
     :up_in: 玩家上家的牌，同上
     """
+    real2pos = {'landlord': 0, 'landlord_up': 1, 'landlord_down': 2}
     UI_object1 = None
     Run_or_Not = False
+    Vision_object = Vision()
 
     pos = 0
     user_hand_card_in = ""
@@ -41,9 +43,7 @@ class event_postion:
         event_postion.UI_object1 = UI()
 
     def __init__(self):
-        # self.pos_func = [initPlayers(), playCards(), getLastPlayedCards, getSelfCardPosition, getHoleCards,
-        #                  getRestCards, getSelfButtonPosition]
-        self.image = None
+        pass
 
     def change_pos(self, pos_in):
         self.pos = pos_in
@@ -57,13 +57,17 @@ class event_postion:
     def run_func(self, image_in):
         if event_postion.over:
             return
-        self.image = image_in
+        event_postion.Vision_object.image_in(image_in)
         if self.pos == 0:
-            pass
+            event_postion.three_landlord_cards_real = event_postion.Vision_object.get_three_landlord_cards_real()
+            event_postion.user_position_in = event_postion.Vision_object.get_user_position_in()
+            event_postion.user_hand_card_in = event_postion.Vision_object.get_user_hand_card_in()
+            event_postion.player_order_in = event_postion.real2pos[event_postion.user_position_in]
         elif self.pos == 1:
-            pass
+            event_postion.up_in = event_postion.Vision_object.get_up_in()
+            event_postion.down_in = event_postion.Vision_object.get_down_in()
         elif self.pos == 2:
-            pass
+            event_postion.over = True
 
     def change_result(self, text_in=""):
         with MyApp.Lock_text:

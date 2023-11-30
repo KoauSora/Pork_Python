@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+# from model import *
 
 EnvCard2RealCard = {3: '3', 4: '4', 5: '5', 6: '6', 7: '7',
                     8: '8', 9: '9', 10: 'T', 11: 'J', 12: 'Q',
@@ -10,10 +11,61 @@ RealCard2EnvCard = {'3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
 
 
 class VisionVirtualBase(ABC):
-    """
-    这是一个识别部分的类
-
-    """
+    # @abstractmethod
+    # def getGameStatus(self):
+    #     """
+    #
+    #     :return:
+    #     """
+    #     pass
+    #
+    # @abstractmethod
+    # def getPlayerCharacter(self, position):
+    #     """
+    #
+    #     :return:
+    #     """
+    #     pass
+    #
+    # @abstractmethod
+    # def getPlayerDeck(self, position) -> Deck:
+    #     """
+    #
+    #     :return:
+    #     """
+    #     pass
+    #
+    # @abstractmethod
+    # def getRestCard(self) -> list[int]:
+    #     """
+    #
+    #     :return:
+    #     """
+    #     pass
+    #
+    # @abstractmethod
+    # def getSelfPlayerStatus(self):
+    #     """
+    #
+    #     :return:
+    #     """
+    #     pass
+    #
+    # @abstractmethod
+    # def getSelfCardsPositions(self):
+    #     """
+    #
+    #     :return:
+    #     """
+    #     pass
+    #
+    # @abstractmethod
+    # def getSelfCardPosition(self, rank) -> (int, int):
+    #     """
+    #
+    #     :return:
+    #     """
+    #     pass
 
     @abstractmethod
     def get_user_hand_card_in(self):
@@ -56,7 +108,7 @@ class VisionVirtualBase(ABC):
         pass
 
     @abstractmethod
-    def image_in(self,image_in):
+    def image_in(self, image_in):
         """
 
         :param image_in: 图片
@@ -64,7 +116,7 @@ class VisionVirtualBase(ABC):
         """
 
     @abstractmethod
-    def position_in(self,point_in):
+    def position_in(self, point_in):
         """
 
         :param point_in: [1,2,3,4]
