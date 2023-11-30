@@ -75,8 +75,7 @@ def getHoleCards():
     get the hole cards
     :return:
     """
-    sys.stderr.write('WARNING! getHoleCards() is not implemented yet!')
-    pass
+    return getCardsInArea(Game.screen, game_areas['public_area'])
 
 
 def getRestCards():

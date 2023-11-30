@@ -39,9 +39,16 @@ class Vision:
         self.pointer_pos0 = []  # 我的位置
         self.pointer_pos1 = []  # 我的上家
         self.pointer_pos2 = []  # 我的下家
+        model.game_areas = {'self_player': self.pointer_pos0,
+                            'next_player': self.pointer_pos1,
+                            'last_player': self.pointer_pos2,
+                            'public_area': self.pointer_three_hand}
 
     def whether_my_turn(self):
-        pass
+        if getSelfButtonPosition("pass"):
+            return True
+        else:
+            return False
 
     def get_user_hand_card_in(self):
         user_hands_string = ""
@@ -52,18 +59,27 @@ class Vision:
         return user_hands_string
 
     def get_user_position_in(self):
-        pass
-
+        for i in range(3):
+            if Game.players[i].character == 0:
+                if (i == 0):
+                    return "landlord"
+                elif (i == 1):
+                    return "landlord_up"
+                else:
+                    return "landlord_down"
 
     def get_three_landlord_cards_real(self):
-        return "AAA"
-        pass
+        tmp_list = getHoleCards()
+        s = ""
+        for i in range(15):
+            s += tmp_list[i] * EnvCard2RealCard[i]
+        return s
 
     def get_down_in(self):
-        pass
+        return getLastPlayedCards(1)
 
     def get_up_in(self):
-        pass
+        return getLastPlayedCards(2)
 
     def image_in(self, image_in):
         updateScreen(image_in)

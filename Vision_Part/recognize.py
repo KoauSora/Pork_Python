@@ -151,7 +151,10 @@ def getButtonPosition(image, button, threshold=0.8, zoom=0.5):
     locations = remove_duplicates(locations)
 
     locations = [(int((i[0] + 5) / zoom), int((i[1] + 5) / zoom + y1)) for i in locations]
-    return locations
+    if locations:
+        return locations
+    else:
+        return None
 
 
 def remove_duplicates(locations):
