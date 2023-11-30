@@ -1,5 +1,5 @@
-from AI_Part.DouZero.env.game import GameEnv, RealCard2EnvCard
-from AI_Part.DouZero.evaluation.deep_agent import DeepAgent
+from Pork_Python.AI_Part.DouZero.env.game import GameEnv, RealCard2EnvCard
+from Pork_Python.AI_Part.DouZero.evaluation.deep_agent import DeepAgent
 import threading
 
 AllEnvCard = [3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7,

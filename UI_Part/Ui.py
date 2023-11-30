@@ -3,7 +3,7 @@ import numpy
 from PIL import ImageGrab  # 这个库用来实现截屏的UI
 import threading
 
-from UI_Part.UI_Base import UI_Base
+from Pork_Python.UI_Part.UI_Base import UI_Base
 
 
 class UI(UI_Base):

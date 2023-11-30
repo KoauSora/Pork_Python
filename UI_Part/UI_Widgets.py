@@ -2,8 +2,8 @@ import tkinter
 import time
 import threading
 
-from UI_Part.Ui import UI
-from UI_Part.UI_Widgets_Base import MyApp_Base
+from Pork_Python.UI_Part.Ui import UI
+from Pork_Python.UI_Part.UI_Widgets_Base import MyApp_Base
 
 
 class MyApp(MyApp_Base):

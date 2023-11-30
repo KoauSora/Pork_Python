@@ -1,9 +1,10 @@
 from abc import ABC
-from Vision_Part.Vision_Base import VisionVirtualBase
+
+from Pork_Python.Vision_Part.Vision_Base import VisionVirtualBase
 import cv2 as cv
 import numpy as np
-from Vision_Part.recognize import *
-
+from Pork_Python.Vision_Part.process import *
+from Pork_Python.Vision_Part.model import *
 
 EnvCard2RealCard = {0: '3', 1: '4', 2: '5', 3: '6', 4: '7',
                     5: '8', 6: '9', 7: 'T', 8: 'J', 9: 'Q',
@@ -28,10 +29,9 @@ def get_pre_pic(pointer, num_in):
     """
 
 
-class Vision():
+class Vision:
     def __init__(self):
-        self.image = None
-        self.pointer_user_hands = [0,0,1,1]  # y1,y2,x1,x2
+        self.pointer_user_hands = [0, 0, 1, 1]  # y1,y2,x1,x2
         self.pointer_three_hand = []
         self.pointer_up_in = []
         self.pointer_down_in = []
@@ -40,25 +40,20 @@ class Vision():
         self.pointer_pos1 = []  # 我的上家
         self.pointer_pos2 = []  # 我的下家
 
-        self.ratio = 1
-        self.threshold = 0.95
-        self.zoom = 1
-
     def whether_my_turn(self):
         pass
 
     def get_user_hand_card_in(self):
-        user_hands = getCardsInArea(self.image, self.pointer_user_hands)
         user_hands_string = ""
-
         for i in range(15):
-            for j in range(user_hands[i]):
+            for j in range(Game.players[0].deck.deck[i]):
                 user_hands_string += EnvCard2RealCard[i]
-        print(user_hands)
+
         return user_hands_string
 
     def get_user_position_in(self):
         pass
+
 
     def get_three_landlord_cards_real(self):
         return "AAA"
@@ -71,7 +66,7 @@ class Vision():
         pass
 
     def image_in(self, image_in):
-        self.image = image_in
+        updateScreen(image_in)
 
 
 if __name__ == '__main__':

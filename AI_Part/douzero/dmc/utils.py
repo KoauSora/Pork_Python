@@ -10,7 +10,7 @@ import torch
 from torch import multiprocessing as mp
 
 from .env_utils import Environment
-from AI_Part.DouZero.env.env import Env
+from Pork_Python.AI_Part.DouZero.env.env import Env
 
 Card2Column = {3: 0, 4: 1, 5: 2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7,
                11: 8, 12: 9, 13: 10, 14: 11, 17: 12}

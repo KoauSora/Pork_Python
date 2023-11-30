@@ -4,8 +4,8 @@ import numpy as np
 if __name__ == '__main__':
 
     # 读取图像
-    image = cv2.imread("C:\\Users\\21525\\Desktop\\Pork\\Pork_Python\\Study_Part\\Sudy_Part_Vision\\template\\pic3.png")
-
+    image = cv2.imread("template/pic2.png")
+    # print(image)
     print(1)
     # 颜色选择
     lower_red = np.array([0, 0, 100])
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # # 膨胀操作
     # dilated = cv2.dilate(equalized_image, kernel, iterations=1)
 
-    cv2.imshow('Result1',equalized_image)
+    cv2.imshow('Result1', equalized_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -60,8 +60,8 @@ if __name__ == '__main__':
         x, y, w, h = cv2.boundingRect(contour)
 
         # 过滤掉过小的区域
-        # if 40 > w > 11 and 50 > h > 25:
-        # 在原图上绘制矩形
+        # if w > 5 and h > 20:
+            # 在原图上绘制矩形
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
         digit_region = binary_image[y:y + h, x:x + w]
 

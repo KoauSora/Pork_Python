@@ -1,14 +1,14 @@
-from Vision_Part.model import *
-from Vision_Part.recognize import *
+from Pork_Python.Vision_Part.model import *
+from Pork_Python.Vision_Part.recognize import *
 
 
-def updateScreen():
+def updateScreen(image):
     """
     update the screen
     pyautogui is faster than imagegrab
     :return:
     """
-    # Game.screen = pyautogui.screenshot()
+    Game.screen = image
     pass
 
 
