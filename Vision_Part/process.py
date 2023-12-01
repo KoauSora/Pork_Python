@@ -17,8 +17,8 @@ def initPlayers():
     initialize the players after the landlord is determined
     :return:
     """
-    Game.players[1].character = getPlayerCharacter(Game.screen, game_areas['next_player'])
-    Game.players[2].character = getPlayerCharacter(Game.screen, game_areas['last_player'])
+    Game.players[1].character = getPlayerCharacter(Game.screen, Game.game_areas['next_player'])
+    Game.players[2].character = getPlayerCharacter(Game.screen, Game.game_areas['last_player'])
 
     if Game.players[1].character == 1:
         Game.players[0].character = 0
@@ -29,7 +29,7 @@ def initPlayers():
     else:
         Game.players[0].character = 1
         Game.lord_position = 0
-    Game.players[0].deck.deck = getCardsInArea(Game.screen, game_areas['self_player'])
+    Game.players[0].deck.deck = getCardsInArea(Game.screen, Game.game_areas['self_player'])
 
 
 def playCards(position, played_cards=None):
@@ -41,12 +41,10 @@ def playCards(position, played_cards=None):
     :return:
     """
     if played_cards is None:
-        played_cards = getCardsInArea(Game.screen, game_areas['last_player' if position == 2 else 'next_player'])
+        played_cards = getCardsInArea(Game.screen, Game.game_areas['last_player' if position == 2 else 'next_player'])
     Game.players[position].deck.deck = [Game.players[position].deck.deck[i] - played_cards[i] for i in range(15)]
-    Game.players[position].deck.played.append(played_cards)
 
     Game.globalDeck.deck = [Game.globalDeck.deck[i] - played_cards[i] for i in range(15)]
-    Game.globalDeck.played.append(played_cards)
 
 
 def getLastPlayedCards(position=None):
@@ -55,9 +53,7 @@ def getLastPlayedCards(position=None):
     :param position: if position is None, get the last played cards in the global deck
     :return: the last played cards
     """
-    if position is None:
-        return Game.globalDeck.played[-1]
-    return Game.players[position].deck.played[-1]
+    return getCardsInArea(Game.screen, list(Game.game_areas.values())[position])
 
 
 def getSelfCardPosition(rank):
@@ -75,7 +71,7 @@ def getHoleCards():
     get the hole cards
     :return:
     """
-    return getCardsInArea(Game.screen, game_areas['public_area'])
+    return getCardsInArea(Game.screen, Game.game_areas['public_area'])
 
 
 def getRestCards():
@@ -92,4 +88,7 @@ def getSelfButtonPosition(button):
     :param button: claim, no_claim, pass, play, no_afford, no_times
     :return:
     """
-    return getButtonPosition(Game.screen, button)[0]
+    if getButtonPosition(Game.screen, button) is None:
+        return None
+    else:
+        return getButtonPosition(Game.screen, button)[0]

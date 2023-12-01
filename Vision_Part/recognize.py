@@ -1,5 +1,6 @@
 import cv2 as cv
 import numpy as np
+import os
 
 
 def getPlayerCharacter(image, area, threshold=0.7, zoom=1):
@@ -35,7 +36,7 @@ def getPlayerCharacter(image, area, threshold=0.7, zoom=1):
     return len(locations) > 0
 
 
-def getCardsInArea(image, area, ratio=1, threshold=0.55, zoom=0.5):
+def getCardsInArea(image, area, ratio=1, threshold=0.85, zoom=0.5):
     """
     modify area to specify an area to recognize,
     modify ratio if the template is not the same size as the card
@@ -61,10 +62,11 @@ def getCardsInArea(image, area, ratio=1, threshold=0.55, zoom=0.5):
 
     deck = [0] * 15
     image = image[y1:y2, x1:x2]
+
     gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     # cards are in the order of 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2, black joker, red joker
     for i in range(15):
-        template = cv.imread('C:\\Users\\21525\\Desktop\\Pork\\Pork_Python\\Vision_Part\\templates\\' + str(i) + '.jpg')
+        template = cv.imread("Vision_Part/templates/" + str(i) + '.png')
         template = cv.resize(template, (int(template.shape[1] * ratio), int(template.shape[0] * ratio)))
         if i >= 13:
             # here we use the colored image to match the jokers
@@ -81,11 +83,10 @@ def getCardsInArea(image, area, ratio=1, threshold=0.55, zoom=0.5):
         locations = remove_duplicates(locations)
 
         deck[i] += len(locations)
-
     return deck
 
 
-def getCardPosition(image, rank, threshold=0.95, zoom=0.5):
+def getCardPosition(image, rank, threshold=0.85, zoom=0.5):
     """
     similar to the function getCardsInArea without looping
     return clickable positions of the cards with the specified rank
@@ -95,7 +96,7 @@ def getCardPosition(image, rank, threshold=0.95, zoom=0.5):
     :param zoom:
     :return:
     """
-    template = cv.imread('Vision_Part/templates/' + str(rank) + '.jpg')
+    template = cv.imread('Vision_Part/templates/' + str(rank) + '.png')
     template = cv.resize(template, (int(template.shape[1] * zoom), int(template.shape[0] * zoom)))
 
     x1 = int(image.shape[1] * 0)
@@ -131,7 +132,7 @@ def getButtonPosition(image, button, threshold=0.8, zoom=0.5):
     :param zoom:
     :return:
     """
-    template = cv.imread('Vision_Part/templates/' + button + '.jpg')
+    template = cv.imread('Vision_Part/templates/' + button + '.png')
     template = cv.resize(template, (int(template.shape[1] * zoom), int(template.shape[0] * zoom)))
     # cv.imshow('t',template)
 

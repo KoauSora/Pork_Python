@@ -1,5 +1,6 @@
 from abc import ABC
 
+from Pork_Python.Vision_Part import model
 from Pork_Python.Vision_Part.Vision_Base import VisionVirtualBase
 import cv2 as cv
 import numpy as np
@@ -32,61 +33,72 @@ def get_pre_pic(pointer, num_in):
 class Vision:
     def __init__(self):
         self.pointer_user_hands = [0, 0, 1, 1]  # y1,y2,x1,x2
-        self.pointer_three_hand = []
-        self.pointer_up_in = []
-        self.pointer_down_in = []
-        self.pointer_button = []
-        self.pointer_pos0 = []  # 我的位置
-        self.pointer_pos1 = []  # 我的上家
-        self.pointer_pos2 = []  # 我的下家
-        model.game_areas = {'self_player': self.pointer_pos0,
-                            'next_player': self.pointer_pos1,
-                            'last_player': self.pointer_pos2,
-                            'public_area': self.pointer_three_hand}
+        self.pointer_three_hand = [0, 0, 1, 1]
+        self.pointer_up_in = [0, 0, 1, 1]
+        self.pointer_down_in = [0, 0, 1, 1]
+        self.pointer_button = [0, 0, 1, 1]
+        self.pointer_pos0 = [0, 0, 1, 1]  # 我的位置
+        self.pointer_pos1 = [0, 0, 1, 1]  # 我的上家
+        self.pointer_pos2 = [0, 0, 1, 1]  # 我的下家
+        model.Game.game_areas = {'self_player': self.pointer_pos0,
+                                 'next_player': self.pointer_pos1,
+                                 'last_player': self.pointer_pos2,
+                                 'public_area': self.pointer_three_hand}
 
-    def whether_my_turn(self):
+    @staticmethod
+    def whether_my_turn():
         if getSelfButtonPosition("pass"):
             return True
         else:
             return False
 
-    def get_user_hand_card_in(self):
+    @staticmethod
+    def get_user_hand_card_in():
         user_hands_string = ""
         for i in range(15):
             for j in range(Game.players[0].deck.deck[i]):
                 user_hands_string += EnvCard2RealCard[i]
-
+        # print(user_hands_string)
         return user_hands_string
 
-    def get_user_position_in(self):
+    @staticmethod
+    def get_user_position_in():
         for i in range(3):
             if Game.players[i].character == 0:
-                if (i == 0):
+                if i == 0:
                     return "landlord"
-                elif (i == 1):
+                elif i == 1:
                     return "landlord_up"
                 else:
                     return "landlord_down"
 
-    def get_three_landlord_cards_real(self):
+    @staticmethod
+    def get_three_landlord_cards_real():
         tmp_list = getHoleCards()
         s = ""
         for i in range(15):
             s += tmp_list[i] * EnvCard2RealCard[i]
         return s
 
-    def get_down_in(self):
-        return getLastPlayedCards(1)
+    @staticmethod
+    def get_down_in():
+        tmp_list = getLastPlayedCards(1)
+        playCards(1, tmp_list)
+        s = ""
+        for i in range(15):
+            s += tmp_list[i] * EnvCard2RealCard[i]
+        return s
 
-    def get_up_in(self):
-        return getLastPlayedCards(2)
+    @staticmethod
+    def get_up_in():
+        tmp_list = getLastPlayedCards(2)
+        playCards(2, tmp_list)
+        s = ""
+        for i in range(15):
+            s += tmp_list[i] * EnvCard2RealCard[i]
+        return s
 
-    def image_in(self, image_in):
+    @staticmethod
+    def image_in(image_in):
         updateScreen(image_in)
 
-
-if __name__ == '__main__':
-    Vision_my = Vision()
-    image = cv.imread("C:\\Users\\21525\\Desktop\\3.png")
-    Vision_my.image_in(image)
-    print(Vision_my.get_user_hand_card_in())
