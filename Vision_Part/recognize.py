@@ -1,3 +1,4 @@
+import cv2
 import cv2 as cv
 import numpy as np
 import os
@@ -36,7 +37,7 @@ def getPlayerCharacter(image, area, threshold=0.7, zoom=1):
     return len(locations) > 0
 
 
-def getCardsInArea(image, area, ratio=1, threshold=0.85, zoom=0.5):
+def getCardsInArea(image, area, ratio=1, threshold=0.85, zoom=0.5, show=False):
     """
     modify area to specify an area to recognize,
     modify ratio if the template is not the same size as the card
@@ -45,6 +46,7 @@ def getCardsInArea(image, area, ratio=1, threshold=0.85, zoom=0.5):
     here we convert the image into a gray one while matching cards except the jokers,
     because we need to split the red joker and the black joker apart by color
 
+    :param show: show the img or not
     :param image: the origin image to process, colored image
     :param area: (x1, x2, y1, y2) map the origin size to 0~1 then use these fraction to specify the area
     :param ratio: the ratio of the template to the card, to match different size of cards
@@ -61,12 +63,20 @@ def getCardsInArea(image, area, ratio=1, threshold=0.85, zoom=0.5):
     y2 = int(image.shape[0] * area[3])
 
     deck = [0] * 15
+
+    if show:
+        cp = image
+        cv2.rectangle(cp, (x1, y1), (x2, y2), (0, 0, 255), 2)
+        cv2.imshow('image', cp)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
     image = image[y1:y2, x1:x2]
 
     gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     # cards are in the order of 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2, black joker, red joker
     for i in range(15):
-        template = cv.imread("Vision_Part/templates/" + str(i) + '.png')
+        template = cv.imread(os.getcwd() + "/templates/" + str(i) + '.png')
         template = cv.resize(template, (int(template.shape[1] * ratio), int(template.shape[0] * ratio)))
         if i >= 13:
             # here we use the colored image to match the jokers
@@ -96,7 +106,7 @@ def getCardPosition(image, rank, threshold=0.85, zoom=0.5):
     :param zoom:
     :return:
     """
-    template = cv.imread('Vision_Part/templates/' + str(rank) + '.png')
+    template = cv.imread(os.getcwd() + '/templates/' + str(rank) + '.png')
     template = cv.resize(template, (int(template.shape[1] * zoom), int(template.shape[0] * zoom)))
 
     x1 = int(image.shape[1] * 0)
@@ -123,24 +133,31 @@ def getCardPosition(image, rank, threshold=0.85, zoom=0.5):
     return locations
 
 
-def getButtonPosition(image, button, threshold=0.8, zoom=0.5):
+def getButtonPosition(image, button, threshold=0.8, zoom=0.5, show=False):
     """
     similar to the function getCardPosition
+    :param show:
     :param image:
     :param button:
     :param threshold:
     :param zoom:
     :return:
     """
-    template = cv.imread('Vision_Part/templates/' + button + '.png')
+    template = cv.imread(os.getcwd() + '/templates/' + button + '.jpg')
     template = cv.resize(template, (int(template.shape[1] * zoom), int(template.shape[0] * zoom)))
     # cv.imshow('t',template)
 
-
     x1 = int(image.shape[1] * 0)
-    y1 = int(image.shape[0] * 1 / 2)
+    y1 = int(image.shape[0] * 1 / 3)
     x2 = int(image.shape[1] * 1)
     y2 = int(image.shape[0] * 1)
+
+    if show:
+        cp = image
+        cv2.rectangle(cp, (x1, y1), (x2, y2), (0, 0, 255), 2)
+        cv2.imshow('image', cp)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
     image = image[y1:y2, x1:x2]
     image = cv.resize(image, (int(image.shape[1] * zoom), int(image.shape[0] * zoom)))
