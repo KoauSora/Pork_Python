@@ -30,3 +30,11 @@
     7. getSelfButtonPosition(button):
     button: 按钮名称, 叫地主: claim, 不叫: no_claim, 出牌: play, 不出: pass
     返回一个(x, y)的tuple, 表示该按钮的位置
+
+### AI_part 部分使用说明
+
+    主要使用step()函数，来对当前的牌组进行更新，以达到预测的作用
+    
+### UI 部分使用说明
+
+    该部分采用的多线程程序，加快运算速度，可以使用qt进一步优化
